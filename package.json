@@ -11,6 +11,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "firebase": "^9.6.10",
+    "firebase-admin": "^10.0.2",
     "playwright": "^1.20.2",
     "telegraf": "^4.7.0"
   }

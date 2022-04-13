@@ -2,9 +2,19 @@ import { Telegraf, Markup } from 'telegraf';
 import { getPage, close } from './sokker/browser.js';
 import login from './sokker/login.js';
 import transfers from './sokker/transfers.js';
+import admin from "firebase-admin";
+import serviceAccount from "./sokker-observer-firebase-adminsdk-vz2in-65dc4bcd3b.js"
+
 
 const TOKEN = '5120962280:AAHrTpFYLqaqtvcDQnwUy5xYs-seorxoZTc';
 const bot = new Telegraf(TOKEN);
+
+const app = admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: "https://sokker-observer.firebaseio.com"
+});
+
+const DB = app.firestore();
 
 
 bot.use(async (ctx, next) => {
@@ -15,25 +25,35 @@ bot.use(async (ctx, next) => {
 })
 
 
-bot.on('text', (ctx) => {
-    console.log('text!');
-    console.log(ctx);
-})
+bot.hears(/^\/start[ =](.+)$/, async (ctx) => {
+    const teamId = ctx.match[1].split('-')[0];
+    const pId = ctx.match[1].split('-')[1];
+    const minutesLeft = ctx.match[1].split('-')[2];
 
-
-//bot.command('start', ctx => ctx.reply('start!'))
-//bot.hears(/^\/start (.*)$/, ctx => ctx.reply('hears!!'));
-
-bot.hears(/^\/start[ =](.+)$/, (ctx) => {
-    const pId = ctx.match[1].split('-')[0];
-    const minutesLeft = ctx.match[1].split('-')[1];
-
-    console.log(ctx.message);
-    // https://api.telegram.org/bot${TOKEN}/getMe
+    // Save user with [chat_id]
+    // TODO: Check if exists
+    // ID - can be team ID
+    await DB.collection('users')
+        .doc(`${teamId}`)
+        .set({
+        id: teamId,
+            // TODO: club name?
+        telegram: {
+            userId: ctx.message.from.id,
+            name: ctx.from.username,
+            chat_id: ctx.message.chat.id,
+        }
+    });
 
     // `https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${ctx.message.chat.id}&text=Привет%20мир`
     ctx.telegram.sendMessage(ctx.message.chat.id, `https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${ctx.message.chat.id}&text=Привет%20мир`);
     ctx.reply(`pId: ${pId}, minutesLeft: ${minutesLeft}`);
+});
+
+
+bot.on('text', (ctx) => {
+    console.log('text!');
+    console.log(ctx.update.message.from.id);
 })
 
 
