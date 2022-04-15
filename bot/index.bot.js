@@ -20,7 +20,6 @@ export const firebase = {
 setupRoutes(telegramBOT, firebase);
 telegramBOT.launch();
 logger.info('telegram bot | started');
-logger.error(e.toString());
 
 
 process.once('SIGINT', () => telegramBOT.stop('SIGINT'));
