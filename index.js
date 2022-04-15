@@ -1,4 +1,4 @@
-import { Telegraf, Markup } from 'telegraf';
+import { Telegraf } from 'telegraf';
 import { getPage, close } from './sokker/browser.js';
 import login from './sokker/login.js';
 import transfers from './sokker/transfers.js';
