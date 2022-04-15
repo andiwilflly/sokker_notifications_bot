@@ -1,4 +1,5 @@
 import logger from "../logger.js";
+import SECRET from "../SECRET.js";
 
 
 export function setupRoutes(telegramBOT, firebase) {
@@ -34,7 +35,7 @@ export function setupRoutes(telegramBOT, firebase) {
             });
 
         // `https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${ctx.message.chat.id}&text=Привет%20мир`
-        await ctx.telegram.sendMessage(ctx.message.chat.id, `https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${ctx.message.chat.id}&text=Привет%20мир`);
+        await ctx.telegram.sendMessage(ctx.message.chat.id, `https://api.telegram.org/bot${SECRET.token}/sendMessage?chat_id=${ctx.message.chat.id}&text=Привет%20мир`);
         ctx.reply(`pId: ${pId}, minutesLeft: ${minutesLeft}`);
     });
 
