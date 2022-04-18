@@ -1,12 +1,12 @@
+logger.info(` `);
+logger.info(` `);
+logger.info(`server | starting...`);
+
 import express from 'express';
 import bodyParser from 'body-parser';
 import logger from "./logger.js";
 import "./bot/index.bot.js";
 import onTransferCreated from "./bot/transferCreated.bot.js";
-
-logger.info(` `);
-logger.info(` `);
-logger.info(`server | starting...`);
 
 
 const app = express();
