@@ -13,7 +13,7 @@ setInterval(async ()=> {
     transfers.forEach(transfer => {
         const soon = 1000 * 60 * 5;
 
-        const polandTime = Date.now() - 1000 * 60;
+        const polandTime = Date.now();
         const isEndsSoon = +(transfer.deadline) - polandTime <= soon;
 
         logger.info(`----> ${+(transfer.deadline) - polandTime}`);
