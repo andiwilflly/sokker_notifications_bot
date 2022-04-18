@@ -2,6 +2,7 @@ import { Telegraf } from 'telegraf';
 import admin from "firebase-admin";
 import SECRET from "../SECRET.js";
 import { setupRoutes } from "./routes.bot.js";
+import "./cron.bot.js";
 import logger from "../logger.js";
 
 
