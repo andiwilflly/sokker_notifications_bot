@@ -15,7 +15,7 @@ setInterval(async ()=> {
 
         const isEndsSoon = +(transfer.deadline) - Date.now() <= soon;
 
-        logger.info('CRON | checking transfer...');
+        logger.info('CRON | checking transfer...: ' + isEndsSoon);
 
         if(isEndsSoon) {
             console.log('herer...', transfer);
