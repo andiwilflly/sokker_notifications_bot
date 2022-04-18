@@ -11,11 +11,11 @@ setInterval(async ()=> {
     transfers.forEach(transfer => {
         const soon = 1000 * 60 * 5;
 
-        const isEndsSoon = transfer.deadline - Date.now() <= soon;
+        const isEndsSoon = +(transfer.deadline) - Date.now() <= soon;
 
         if(!isEndsSoon) {
             console.log('herer...', transfer);
-            console.log(transfers.deadline - Date.now(), isEndsSoon);
+            console.log(+(transfer.deadline), Date.now(), isEndsSoon);
             telegramBOT.telegram.sendMessage(transfer.chat_id, `
                 🔥🔥🔥 Player transfer ready | https://sokker.org/player/PID/${transfer.pId} - ${formatDistance(transfer.deadline, Date.now())}
             `);
