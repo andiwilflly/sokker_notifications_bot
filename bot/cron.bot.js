@@ -8,7 +8,7 @@ setInterval(async ()=> {
     const snapshot = await firebase.DB.collection('transfers').get();
     const transfers = snapshot.docs.map(doc => doc.data());
 
-    logger.info('CRON | checking transfers...');
+    logger.info('CRON | checking transfers...' + transfers.length);
 
     transfers.forEach(transfer => {
         const soon = 1000 * 60 * 5;
@@ -28,4 +28,4 @@ setInterval(async ()=> {
         }
     });
 
-}, 5000);
+}, 1000 * 60 * 3);
