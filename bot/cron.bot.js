@@ -1,25 +1,27 @@
-import cron from 'node-cron';
-import { firebase } from "./index.bot.js";
+import { formatDistance } from "date-fns";
+import { firebase, telegramBOT } from "./index.bot.js";
 import logger from "../logger.js";
 
 
 logger.info('CRON | started...');
-// cron.schedule('*/1 * * * *', async ()=> {
-//     logger.info('CRON | running a task every 1 minutes');
-//
-//     const snapshot = await firebase.DB.collection('transfers').get();
-//     const transfers = snapshot.docs.map(doc => doc.data());
-//
-//     logger.info('CRON | transfers');
-//     logger.info(transfers.length);
-// });
-
-
 setInterval(async ()=> {
     const snapshot = await firebase.DB.collection('transfers').get();
     const transfers = snapshot.docs.map(doc => doc.data());
 
-    logger.info('CRON | !!!');
-    console.log(transfers);
-    console.log('!!!!');
-}, 5000);
+    transfers.forEach(transfer => {
+        const soon = 1000 * 60 * 5;
+
+        const isEndsSoon = transfer.deadline - Date.now() <= soon;
+
+        if(!isEndsSoon) {
+            console.log('herer...', transfer);
+            console.log(transfers.deadline - Date.now(), isEndsSoon);
+            telegramBOT.telegram.sendMessage(transfer.chat_id, `
+                🔥🔥🔥 Player transfer ready | https://sokker.org/player/PID/${transfer.pId} - ${formatDistance(transfer.deadline, Date.now())}
+            `);
+            // Remove transfer from DB
+            firebase.DB.collection('transfers').doc(transfer.pId).delete();
+        }
+    });
+
+}, 1000 * 60 * 0.5);
