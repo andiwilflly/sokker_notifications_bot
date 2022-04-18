@@ -4,6 +4,11 @@ import logger from "./logger.js";
 import "./bot/index.bot.js";
 import onTransferCreated from "./bot/transferCreated.bot.js";
 
+logger.info(` `);
+logger.info(` `);
+logger.info(`server | starting...`);
+
+
 const app = express();
 const port = 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
