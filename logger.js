@@ -6,10 +6,10 @@ const logger = pino({
         target: 'pino-pretty',
         options: {
             colorize: true,
-            messageFormat: (log, messageKey, levelLabel) => {
-                // do some log message customization
-                return `{${levelLabel} | {${new Date().toLocaleString()}: ${log}`;
-            }
+            // messageFormat: (log, messageKey, levelLabel) => {
+            //     // do some log message customization
+            //     return `{${levelLabel} | {${new Date().toLocaleString()}: ${log}`;
+            // }
         }
     },
 });
