@@ -16,7 +16,7 @@ export function setupRoutes(telegramBOT, firebase) {
     telegramBOT.hears(/^\/start[ =](.+)$/, async (ctx)=> {
         const teamId = ctx.match[1].split('-')[0];
         const pId = ctx.match[1].split('-')[1];
-        const minutesLeft = ctx.match[1].split('-')[2];
+        const deadline = ctx.match[1].split('-')[2];
         const chat_id = ctx.message.chat_id;
 
         logger.info('firebase | DB save [user] to users');
@@ -37,11 +37,11 @@ export function setupRoutes(telegramBOT, firebase) {
         await this.props.DB
             .collection('transfers')
             .doc(`${pId}`)
-            .set({ userId: teamId, pId, minutesLeft, chat_id });
+            .set({ userId: teamId, pId, deadline, chat_id });
 
         // `https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${ctx.message.chat.id}&text=Привет%20мир`
         await ctx.telegram.sendMessage(ctx.message.chat.id, `https://api.telegram.org/bot${SECRET.token}/sendMessage?chat_id=${ctx.message.chat.id}`);
-        ctx.reply(`pId: ${pId}, minutesLeft: ${minutesLeft}`);
+        ctx.reply(`pId: ${pId}, deadlineMs: ${deadline}`);
     });
 
 

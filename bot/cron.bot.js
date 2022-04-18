@@ -4,12 +4,22 @@ import logger from "../logger.js";
 
 
 logger.info('CRON | started...');
-cron.schedule('*/1 * * * *', async ()=> {
-    logger.info('CRON | running a task every 1 minutes');
+// cron.schedule('*/1 * * * *', async ()=> {
+//     logger.info('CRON | running a task every 1 minutes');
+//
+//     const snapshot = await firebase.DB.collection('transfers').get();
+//     const transfers = snapshot.docs.map(doc => doc.data());
+//
+//     logger.info('CRON | transfers');
+//     logger.info(transfers.length);
+// });
 
+
+setInterval(async ()=> {
     const snapshot = await firebase.DB.collection('transfers').get();
     const transfers = snapshot.docs.map(doc => doc.data());
 
-    logger.info('CRON | transfers');
-    logger.info(transfers.length);
-});
+    logger.info('CRON | !!!');
+    console.log(transfers);
+    console.log('!!!!');
+}, 5000);

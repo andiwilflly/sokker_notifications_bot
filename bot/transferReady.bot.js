@@ -8,7 +8,7 @@ export default async function onTransferCreated(req, res) {
 
     // Create transfer in DB
     telegramBOT.telegram.sendMessage(req.query.chat_id, `
-        🔥🔥🔥 Player transfer ready | https://sokker.org/player/PID/${req.query.pId} - ${formatDistance(0, +req.query.minutesLeft)}
+        🔥🔥🔥 Player transfer ready | https://sokker.org/player/PID/${req.query.pId} - ${formatDistance(0, +req.query.deadline)}
     `);
 
     res.send(JSON.stringify({ ok: true }));
