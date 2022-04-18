@@ -5,7 +5,11 @@ const logger = pino({
     transport: {
         target: 'pino-pretty',
         options: {
-            colorize: true
+            colorize: true,
+            messageFormat: (log, messageKey, levelLabel) => {
+                // do some log message customization
+                return `{${levelLabel} | {${new Date().toLocaleString()}: ${log}`;
+            }
         }
     },
 });
