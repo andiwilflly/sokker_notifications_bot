@@ -15,11 +15,8 @@ setInterval(async ()=> {
 
         const isEndsSoon = +(transfer.deadline) - Date.now() <= soon;
 
-        logger.info('CRON | checking transfer...: ' + '' + (transfer.deadline) - Date.now());
-
         if(isEndsSoon) {
-            logger.info('herer...', transfer);
-            logger.info(+(transfer.deadline) - Date.now(), isEndsSoon);
+            logger.info('isEndsSoon...');
             telegramBOT.telegram.sendMessage(transfer.chat_id, `
                 🔥🔥🔥 Player transfer ready | https://sokker.org/player/PID/${transfer.pId} - ${formatDistance(transfer.deadline, Date.now())}
             `);
