@@ -21,7 +21,7 @@ setInterval(async ()=> {
         if(isEndsSoon) {
             logger.info('isEndsSoon...');
             telegramBOT.telegram.sendMessage(transfer.chat_id, `
-                🔥🔥🔥 Player transfer ready | https://sokker.org/player/PID/${transfer.pId} - ${formatDistance(transfer.deadline, Date.now())}
+                🔥🔥🔥 Player transfer ready | https://sokker.org/player/PID/${transfer.pId} - ${formatDistance(0, deadlineTime - Date.now())}
             `);
             // Remove transfer from DB
             firebase.DB.collection('transfers').doc(transfer.pId).delete();
