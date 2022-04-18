@@ -16,7 +16,7 @@ setInterval(async ()=> {
         const deadlineTime = +(transfer.deadline) + 1000 * 60 * 60;
         const isEndsSoon = deadlineTime - Date.now() <= soon;
 
-        logger.info(`----> ${deadlineTime - Date.now()}`);
+        logger.info(`----> ${formatDistance(0, deadlineTime - Date.now())}`);
 
         if(isEndsSoon) {
             logger.info('isEndsSoon...');
