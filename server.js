@@ -10,6 +10,10 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
 });
 
+app.get('/test', (req, res) => {
+    logger.info(`test | message`);
+});
+
 
 app.listen(port, () => {
     logger.info(`server | runiing on ${port} port`);
