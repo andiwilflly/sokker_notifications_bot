@@ -13,7 +13,7 @@ setInterval(async ()=> {
 
         const isEndsSoon = +(transfer.deadline) - Date.now() <= soon;
 
-        if(!isEndsSoon) {
+        if(isEndsSoon) {
             console.log('herer...', transfer);
             console.log(+(transfer.deadline), Date.now(), isEndsSoon);
             telegramBOT.telegram.sendMessage(transfer.chat_id, `
@@ -24,4 +24,4 @@ setInterval(async ()=> {
         }
     });
 
-}, 1000 * 60 * 0.5);
+}, 1000 * 60 * 3);
