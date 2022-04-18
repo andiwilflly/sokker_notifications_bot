@@ -11,5 +11,5 @@ cron.schedule('*/1 * * * *', async ()=> {
     const transfers = snapshot.docs.map(doc => doc.data());
 
     logger.info('CRON | transfers');
-    console.log(transfers, 'transfers!');
+    logger.info(transfers.length);
 });
