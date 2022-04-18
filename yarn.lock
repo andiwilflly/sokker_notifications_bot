@@ -881,6 +881,11 @@
   "resolved" "https://registry.npmjs.org/date-and-time/-/date-and-time-2.3.0.tgz"
   "version" "2.3.0"
 
+"date-fns@^2.28.0":
+  "integrity" "sha512-8d35hViGYx/QH0icHYCeLmsLmMUheMmTyV9Fcm6gvNwdw31yXXH+O85sOBJ+OLnLQMKZowvpKb6FgMIQjcpvQw=="
+  "resolved" "https://registry.npmjs.org/date-fns/-/date-fns-2.28.0.tgz"
+  "version" "2.28.0"
+
 "dateformat@^4.6.3":
   "integrity" "sha512-2P0p0pFGzHS5EMnhdxQi7aJN+iMheud0UhG4dlE1DLAlvL8JHjJJTX/CSm4JXwV0Ka5nGk3zC5mcb5bUQUxxMA=="
   "resolved" "https://registry.npmjs.org/dateformat/-/dateformat-4.6.3.tgz"

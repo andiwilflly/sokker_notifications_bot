@@ -1,5 +1,6 @@
 import pino from 'pino';
 
+
 const logger = pino({
     transport: {
         target: 'pino-pretty',
@@ -8,5 +9,9 @@ const logger = pino({
         }
     },
 });
+
+logger.info(` `);
+logger.info(` `);
+logger.info(`server | starting`);
 
 export default logger;

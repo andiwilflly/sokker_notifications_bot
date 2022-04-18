@@ -13,14 +13,12 @@ export function setupRoutes(telegramBOT, firebase) {
     });
 
 
-    telegramBOT.hears(/^\/start[ =](.+)$/, async (ctx) => {
+    telegramBOT.hears(/^\/start[ =](.+)$/, async (ctx)=> {
         const teamId = ctx.match[1].split('-')[0];
         const pId = ctx.match[1].split('-')[1];
         const minutesLeft = ctx.match[1].split('-')[2];
+        const chat_id = ctx.message.chat_id;
 
-        // Save user with [chat_id]
-        // TODO: Check if exists
-        // ID - can be team ID
         logger.info('firebase | DB save [user] to users');
         await firebase.DB.collection('users')
             .doc(`${teamId}`)
@@ -33,6 +31,13 @@ export function setupRoutes(telegramBOT, firebase) {
                     chat_id: ctx.message.chat.id,
                 }
             });
+
+        // Create transfer in DB (only first time)
+        logger.info(`firebase | DB save [transfer pId=${pId}] to transfers`);
+        await this.props.DB
+            .collection('transfers')
+            .doc(`${pId}`)
+            .set({ userId: teamId, pId, minutesLeft, chat_id });
 
         // `https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${ctx.message.chat.id}&text=Привет%20мир`
         await ctx.telegram.sendMessage(ctx.message.chat.id, `https://api.telegram.org/bot${SECRET.token}/sendMessage?chat_id=${ctx.message.chat.id}`);

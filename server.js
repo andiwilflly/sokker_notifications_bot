@@ -1,18 +1,15 @@
-logger.info(` `);
-logger.info(` `);
-logger.info(`server | starting...`);
-
 import express from 'express';
 import bodyParser from 'body-parser';
 import logger from "./logger.js";
 import "./bot/index.bot.js";
 import onTransferCreated from "./bot/transferCreated.bot.js";
-
+import onTransferReady from "./bot/transferReady.bot.js";
 
 const app = express();
-const port = 3000;
-app.use(bodyParser.urlencoded({ extended: true }));
+const port = 4000;
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({ type: 'application/*+json' }));
 
 app.get('/', (req, res)=> {
     res.send('Hello World1')
@@ -24,7 +21,8 @@ app.get('/test', (req, res)=> {
 });
 
 
-app.post('/transferCreated', onTransferCreated);
+app.get('/transferCreated', onTransferCreated);
+app.get('/transferReady', onTransferReady);
 
 
 app.listen(port, () => {
