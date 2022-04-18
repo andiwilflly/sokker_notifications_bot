@@ -16,6 +16,8 @@ setInterval(async ()=> {
         const polandTime = Date.now() - 1000 * 60;
         const isEndsSoon = +(transfer.deadline) - polandTime <= soon;
 
+        logger.info(`----> ${+(transfer.deadline) - polandTime}`);
+
         if(isEndsSoon) {
             logger.info('isEndsSoon...');
             telegramBOT.telegram.sendMessage(transfer.chat_id, `
@@ -26,4 +28,4 @@ setInterval(async ()=> {
         }
     });
 
-}, 1000 * 60 * 3);
+}, 1000 * 60 * 2);
